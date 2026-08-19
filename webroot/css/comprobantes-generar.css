@@ -1,0 +1,1113 @@
+/* ═══════════════════════════════════════════════════════════════
+   GENERAR FACTURA (CFDI)  — comprobantes-generar.css
+   Usa las variables de saf.css: --navy, --teal, --bg, --surface…
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── contenedor principal ── */
+.cfdi-gen {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+/* ── botones ── */
+.cfdi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+  border: 1px solid transparent;
+  font-family: 'DM Sans', sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.cfdi-btn--primary    { background: var(--navy);    color: #fff; }
+.cfdi-btn--primary:hover { background: var(--navy-mid); }
+.cfdi-btn--secondary  { background: transparent; color: var(--text2); border-color: var(--border); }
+.cfdi-btn--secondary:hover { background: var(--surface2); color: var(--text); border-color: var(--border2); }
+.cfdi-btn--ghost-header { background: transparent; color: var(--text3); border-color: var(--border); }
+.cfdi-btn--ghost-header:hover { background: var(--surface2); color: var(--text2); }
+.cfdi-btn--on-orange  { background: #FFF3E0; color: #C05000; border-color: #F6D0A0; }
+.cfdi-btn--sm  { padding: 5px 10px; font-size: 11.5px; }
+.cfdi-btn--lg  { padding: 9px 18px; font-size: 13px; font-weight: 600; }
+.cfdi-btn--block { width: 100%; justify-content: center; }
+.cfdi-btn:disabled, .cfdi-btn[disabled] {
+  opacity: .45; cursor: not-allowed; pointer-events: none;
+}
+
+/* ── header de la página ── */
+.cfdi-al-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 0 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 18px;
+}
+.cfdi-al-header-left { display: flex; align-items: baseline; gap: 10px; }
+.cfdi-al-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--text);
+  letter-spacing: -.4px;
+  margin: 0;
+}
+.cfdi-al-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-family: 'DM Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.cfdi-al-actions { display: flex; align-items: center; gap: 8px; }
+.cfdi-al-sub {
+  font-size: 12.5px;
+  color: var(--text3);
+  margin: -6px 0 18px;
+}
+.cfdi-reuse-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(15, 118, 110, .25);
+  background: rgba(15, 118, 110, .08);
+  color: var(--text2);
+  font-size: 13px;
+}
+.cfdi-reuse-banner i { color: #0f766e; }
+
+/* ── panels / cards ── */
+.cfdi-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 16px;
+  overflow: visible;
+}
+.cfdi-panel-top {
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg);
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.cfdi-panel-top--between { justify-content: space-between; }
+.cfdi-panel-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  letter-spacing: -.2px;
+}
+.cfdi-panel-hint {
+  font-size: 11.5px;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.cfdi-panel-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cfdi-panel-body { padding: 18px; }
+
+/* ── emisor identity block ── */
+.cfdi-emit-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--surface2) 0%, var(--surface) 100%);
+}
+.cfdi-emit-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--navy);
+  flex-shrink: 0;
+}
+.cfdi-emit-meta { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+.cfdi-emit-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+.cfdi-emit-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+  letter-spacing: -.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cfdi-emit-rfc {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--text2);
+  letter-spacing: .3px;
+}
+.cfdi-emit-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  background: var(--teal-light);
+  color: var(--teal-dark);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-weight: 600;
+  border: 1px solid rgba(43,191,179,.2);
+  width: fit-content;
+}
+.cfdi-emit-body { display: flex; flex-direction: column; }
+.cfdi-emit-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px 18px;
+}
+.cfdi-emit-fields--center { align-items: center; }
+
+/* ── form fields ── */
+.cfdi-emit-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.cfdi-emit-field--xs   { flex: 0 0 72px; }
+.cfdi-emit-field--sm   { flex: 0 0 120px; }
+.cfdi-emit-field--md   { flex: 0 0 180px; }
+.cfdi-emit-field--lg   { flex: 0 1 300px; }
+.cfdi-emit-field--grow { flex: 1 1 160px; }
+.cfdi-emit-field--full { flex: 1 1 100%; }
+.cfdi-emit-field--btn  { flex: 0 0 auto; justify-content: flex-end; }
+.cfdi-emit-field--desc { flex: 1 1 100%; }
+.cfdi-emit-field--cp   { flex: 0 0 100px; }
+.cfdi-emit-field--serie { flex: 0 0 80px; }
+.cfdi-emit-field--folio { flex: 0 0 90px; }
+.cfdi-emit-field--fecha { flex: 0 1 170px; }
+.cfdi-emit-field--regimen { flex: 1 1 240px; }
+
+.cfdi-emit-field-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+}
+.cfdi-req { color: var(--red); margin-left: 1px; }
+
+/* ── form inputs ── */
+.form-input {
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 12.5px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 7px;
+  transition: border-color .15s, box-shadow .15s;
+  outline: none;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+.form-input:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(27,58,140,.1);
+}
+.form-input::placeholder { color: var(--text3); }
+select.form-input { appearance: none; cursor: pointer; padding-right: 28px; }
+textarea.form-input { resize: vertical; }
+
+/* ── select wrapper with icon ── */
+.cfdi-emit-select-wrap { position: relative; }
+.cfdi-emit-select-wrap select.form-input { padding-left: 30px; }
+.cfdi-emit-select-icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--text3);
+  pointer-events: none;
+  z-index: 1;
+}
+.cfdi-emit-date-wrap { position: relative; }
+
+/* ── section title inside panel ── */
+.cfdi-emit-section-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  font-family: 'DM Mono', monospace;
+  padding: 0 18px 4px;
+  border-bottom: 1px solid var(--surface2);
+  margin-bottom: 0;
+}
+.cfdi-emit-section-title--spaced { margin-top: 4px; }
+
+/* ── autocomplete ── */
+.cfdi-ac-wrap { position: relative; }
+.cfdi-ac-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  z-index: 200;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.cfdi-ac-dropdown.hidden { display: none; }
+.cfdi-ac-dropdown__head{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 8px 12px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text3);
+  background: linear-gradient(180deg, var(--bg), var(--surface));
+  border-bottom: 1px solid var(--border);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .4px;
+  text-transform: uppercase;
+}
+.cfdi-ac-item {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  padding: 9px 13px;
+  font-size: 12.5px;
+  color: var(--text);
+  cursor: pointer;
+  border-bottom: 1px solid var(--surface2);
+  line-height: 1.35;
+  transition: background .12s, color .12s;
+}
+.cfdi-ac-item:last-child { border-bottom: none; }
+.cfdi-ac-item:hover { background: rgba(27,58,140,.06); }
+.cfdi-ac-item:focus-visible{
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba(43,191,179,.75);
+  background: rgba(43,191,179,.08);
+}
+.cfdi-ac-item.active{
+  background: rgba(43,191,179,.10);
+  color: var(--text);
+}
+.cfdi-ac-item__title{
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -.15px;
+}
+.cfdi-ac-item__meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-top:4px;
+}
+.cfdi-ac-badge{
+  display:inline-flex;
+  align-items:center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 600;
+  font-family:'DM Mono', monospace;
+  letter-spacing:.3px;
+  background: var(--accent-bg);
+  color: var(--navy);
+  border: 1px solid rgba(27,58,140,.18);
+}
+.cfdi-ac-meta{
+  font-size: 11px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+.cfdi-ac-item__sub { font-size: 11px; color: var(--text3); margin-top: 2px; font-family: 'DM Mono', monospace; }
+.cfdi-ac-empty {
+  padding: 14px 13px;
+  font-size: 12px;
+  color: var(--text3);
+  text-align: center;
+}
+
+/* scrollbar en dropdown */
+.cfdi-ac-dropdown::-webkit-scrollbar{width:6px}
+.cfdi-ac-dropdown::-webkit-scrollbar-thumb{background:var(--border2);border-radius:6px}
+.cfdi-ac-dropdown::-webkit-scrollbar-thumb:hover{background:var(--text3)}
+
+/* ── checkbox / radio check ── */
+.cfdi-check-optional {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text2);
+  cursor: pointer;
+  user-select: none;
+}
+.checkbox-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text);
+  cursor: pointer;
+  margin-right: 16px;
+}
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--text);
+  cursor: pointer;
+  margin-right: 16px;
+}
+
+/* ── rounding bar ── */
+.cfdi-rounding-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 18px;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text2);
+  flex-wrap: wrap;
+}
+.cfdi-rounding-bar label { cursor: pointer; display: flex; align-items: center; gap: 5px; }
+
+/* ── conceptos grid ── */
+.cfdi-conceptos-grid {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.cfdi-conceptos-grid__main { flex: 1; min-width: 0; }
+
+/* ── importe preview aside ── */
+.cfdi-importe-preview {
+  flex: 0 0 130px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 18px;
+}
+.cfdi-importe-preview__label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+}
+.cfdi-importe-preview__input {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 10px 10px;
+  font-size: 15px;
+  font-family: 'DM Mono', monospace;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: right;
+  width: 100%;
+  cursor: default;
+}
+
+/* ── impuestos title ── */
+.cfdi-emit-impuestos-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 8px;
+}
+.cfdi-emit-impuestos-title--inline { margin-top: 10px; }
+.cfdi-emit-impuestos-before-btn { padding-top: 4px; }
+
+/* ── "Líneas agregadas" section ── */
+.cfdi-emit-post-conceptos { padding: 0 18px 18px; }
+.cfdi-emit-lineas-title {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  color: var(--text3);
+  font-family: 'DM Mono', monospace;
+  margin: 0 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--surface2);
+}
+
+/* ── conceptos table ── */
+#conceptosTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  color: var(--text);
+}
+#conceptosTable thead th {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+}
+#conceptosTable tbody td {
+  border: 1px solid var(--border);
+  padding: 9px 10px;
+  vertical-align: top;
+  line-height: 1.35;
+}
+#conceptosTable tbody tr:hover td { background: var(--surface2); }
+
+/* ── acciones del listado de conceptos ── */
+.cfdi-conceptos-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  min-width: 76px;
+  padding: 6px 8px !important;
+  vertical-align: middle !important;
+  position: sticky;
+  right: 0;
+  background: var(--surface);
+  z-index: 1;
+  box-shadow: -6px 0 10px rgba(15, 23, 42, .04);
+}
+#conceptosTable thead th:last-child {
+  position: sticky;
+  right: 0;
+  z-index: 2;
+  background: var(--bg);
+  box-shadow: -6px 0 10px rgba(15, 23, 42, .04);
+  text-align: center;
+  min-width: 76px;
+}
+#conceptosTable tbody tr:hover td.cfdi-conceptos-actions {
+  background: var(--surface2);
+}
+.cfdi-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: var(--surface2);
+  color: var(--text3);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background .15s, border-color .15s, color .15s, box-shadow .15s, transform .12s;
+}
+.cfdi-icon-btn i {
+  pointer-events: none;
+}
+.cfdi-icon-btn:hover {
+  transform: translateY(-1px);
+}
+.cfdi-icon-btn:active {
+  transform: translateY(0);
+}
+.cfdi-icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(27, 58, 140, .15);
+}
+.cfdi-icon-btn--edit {
+  color: var(--navy);
+  background: rgba(27, 58, 140, .08);
+  border-color: rgba(27, 58, 140, .12);
+}
+.cfdi-icon-btn--edit:hover {
+  color: var(--navy);
+  background: rgba(27, 58, 140, .14);
+  border-color: rgba(27, 58, 140, .22);
+  box-shadow: 0 2px 6px rgba(27, 58, 140, .12);
+}
+.cfdi-icon-btn--danger {
+  color: #b42318;
+  background: rgba(180, 35, 24, .08);
+  border-color: rgba(180, 35, 24, .12);
+}
+.cfdi-icon-btn--danger:hover {
+  color: #912018;
+  background: rgba(180, 35, 24, .14);
+  border-color: rgba(180, 35, 24, .22);
+  box-shadow: 0 2px 6px rgba(180, 35, 24, .12);
+}
+.cfdi-icon-btn--danger:focus-visible {
+  box-shadow: 0 0 0 3px rgba(180, 35, 24, .15);
+}
+.cfdi-empty-msg {
+  text-align: center;
+  color: var(--text3);
+  padding: 18px 12px !important;
+  font-size: 12.5px;
+}
+.cfdi-impuesto-nombre { font-size: 12px; }
+.cfdi-money-cell {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.cfdi-money-cell__prefix {
+  padding: 0 7px;
+  font-size: 12px;
+  color: var(--text3);
+  background: var(--surface2);
+  border-right: 1px solid var(--border);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+}
+.cfdi-money-cell__input {
+  flex: 1;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+  font-size: 12.5px;
+  padding: 6px 8px;
+  min-width: 0;
+}
+#conceptosTable tfoot td {
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+}
+.cfdi-tfoot-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text2);
+  text-align: right;
+  background: var(--bg);
+}
+
+/* ── total inputs in tfoot ── */
+.cfdi-total-input {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--surface);
+  min-width: 110px;
+}
+.cfdi-total-input--highlight {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 2px rgba(27,58,140,.08);
+}
+.cfdi-total-input__prefix {
+  padding: 0 7px;
+  font-size: 12px;
+  color: var(--text3);
+  background: var(--surface2);
+  border-right: 1px solid var(--border);
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  font-family: 'DM Mono', monospace;
+}
+.cfdi-total-input__field {
+  flex: 1;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-align: right;
+  font-family: 'DM Mono', monospace;
+  font-size: 12.5px;
+  padding: 6px 8px;
+  min-width: 0;
+}
+.cfdi-total-input__field--total {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 14px;
+}
+
+/* ── action bar ── */
+.cfdi-actions--after-lineas {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── modal ── */
+.cfdi-modal-root {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.cfdi-modal-root.cfdi-modal--open { display: flex; }
+.cfdi-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(14,28,64,.35);
+  backdrop-filter: blur(2px);
+}
+.cfdi-modal-shell {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  pointer-events: none;
+}
+.cfdi-modal-card {
+  background: var(--surface);
+  border-radius: 14px;
+  box-shadow: 0 8px 40px rgba(14,28,64,.18);
+  padding: 28px 28px 22px;
+  max-width: 420px;
+  width: 100%;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+.cfdi-modal--downloads .cfdi-modal-card { max-width: 480px; }
+.cfdi-modal-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.cfdi-modal-icon-wrap--error   { background: var(--red-bg);   color: var(--red);   }
+.cfdi-modal-icon-wrap--warning { background: var(--amber-bg); color: var(--amber); }
+.cfdi-modal-icon-wrap--success { background: var(--green-bg); color: var(--green); }
+.cfdi-modal-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -.3px;
+}
+.cfdi-modal-message {
+  font-size: 13px;
+  color: var(--text2);
+  margin: 0;
+  line-height: 1.5;
+}
+.cfdi-modal-downloads { width: 100%; }
+.cfdi-modal-downloads-hint {
+  font-size: 12px;
+  color: var(--text3);
+  margin-bottom: 10px;
+}
+.cfdi-modal-downloads-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cfdi-modal-footer {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  justify-content: center;
+}
+body.cfdi-modal-active { overflow: hidden; }
+
+/* ── step badges ── */
+.cfdi-step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Syne', sans-serif;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+.cfdi-step-badge--teal { background: var(--teal); }
+
+/* ── emit logo with initials ── */
+.cfdi-emit-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+/* ── misc ── */
+.hidden { display: none !important; }
+.overflow-x-auto { overflow-x: auto; }
+.min-w-full { min-width: 100%; }
+.font-semibold { font-weight: 600; }
+.text-default-700 { color: var(--text); }
+.ms-1\.5 { margin-left: 6px; }
+
+/* ── responsive ── */
+@media (max-width: 680px) {
+  .cfdi-al-header { flex-direction: column; align-items: flex-start; }
+  .cfdi-emit-identity { flex-wrap: wrap; }
+  .cfdi-conceptos-grid { flex-direction: column; }
+  .cfdi-importe-preview { flex: unset; width: 100%; flex-direction: row; align-items: center; }
+  .cfdi-emit-field--xs,
+  .cfdi-emit-field--sm,
+  .cfdi-emit-field--md { flex: 1 1 120px; }
+  .cfdi-actions--after-lineas { flex-direction: column; }
+  .cfdi-actions--after-lineas .cfdi-btn { width: 100%; justify-content: center; }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CARTA PORTE 3.1 — Bootstrap → SAF overrides
+   Todo escopado a #div_carta_porte30 (contenido expandible).
+   Sub-paneles internos usan .panel.panel-saf.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── sub-paneles internos (Autotransporte, Mercancías, etc.) ── */
+#div_carta_porte30 .panel.panel-saf {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+  overflow: visible;
+}
+
+/* ── encabezados de sub-paneles ── */
+#div_carta_porte30 .panel.panel-saf > .panel-heading {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: var(--radius) var(--radius) 0 0;
+  display: flex;
+  align-items: center;
+}
+#div_carta_porte30 .panel.panel-saf > .panel-heading > .panel-title,
+#div_carta_porte30 .panel.panel-saf > .panel-heading h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text);
+  letter-spacing: -.1px;
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+#div_carta_porte30 .panel.panel-saf > .panel-heading.text-center {
+  background: var(--surface2);
+  text-align: left !important;
+}
+#div_carta_porte30 .panel.panel-saf > .panel-heading.text-center .panel-title,
+#div_carta_porte30 .panel.panel-saf > .panel-heading.text-center h3 {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .7px;
+  font-family: 'DM Mono', monospace;
+}
+
+/* ── wizard content wrapper ── */
+#div_carta_porte30 .wizard-content { padding: 0; }
+
+/* ── checkboxes internos ── */
+#div_carta_porte30 .custom-control.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding: 0;
+}
+#div_carta_porte30 .custom-control-input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--teal);
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+}
+#div_carta_porte30 .custom-control-indicator { display: none; }
+
+/* ── Bootstrap row → flex row ── */
+#div_carta_porte30 .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 12px 12px 0;
+  gap: 0;
+}
+
+/* ── columnas ── */
+#div_carta_porte30 [class*="col-md-"] {
+  padding: 0 6px;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+#div_carta_porte30 .col-md-1  { width: 8.333%;  }
+#div_carta_porte30 .col-md-2  { width: 16.666%; }
+#div_carta_porte30 .col-md-3  { width: 25%;     }
+#div_carta_porte30 .col-md-4  { width: 33.333%; }
+#div_carta_porte30 .col-md-5  { width: 41.666%; }
+#div_carta_porte30 .col-md-6  { width: 50%;     }
+#div_carta_porte30 .col-md-7  { width: 58.333%; }
+#div_carta_porte30 .col-md-8  { width: 66.666%; }
+#div_carta_porte30 .col-md-9  { width: 75%;     }
+#div_carta_porte30 .col-md-10 { width: 83.333%; }
+#div_carta_porte30 .col-md-11 { width: 91.666%; }
+#div_carta_porte30 .col-md-12 { width: 100%;    }
+
+/* ── fieldset reset ── */
+#div_carta_porte30 fieldset,
+#div_carta_porte30 fieldset.form-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+/* ── form-group ── */
+#div_carta_porte30 .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 0;
+}
+#div_carta_porte30 .has-feedback {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ── labels ── */
+#div_carta_porte30 label,
+#div_carta_porte30 .form-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+#div_carta_porte30 label.required::after {
+  content: ' *';
+  color: var(--red, #e53e3e);
+  font-weight: 700;
+}
+
+/* ── form-control ── */
+#div_carta_porte30 .form-control {
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 12.5px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 7px;
+  transition: border-color .15s, box-shadow .15s;
+  outline: none;
+  line-height: 1.4;
+  box-sizing: border-box;
+  height: auto;
+  box-shadow: none;
+}
+#div_carta_porte30 .form-control:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(27,58,140,.1);
+}
+#div_carta_porte30 .form-control::placeholder { color: var(--text3); }
+#div_carta_porte30 select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 26px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 10px;
+}
+#div_carta_porte30 textarea.form-control { resize: vertical; }
+
+/* ── ícono de ayuda (fa-question-circle) ── */
+#div_carta_porte30 .form-control-feedback {
+  position: absolute;
+  right: 8px;
+  bottom: 9px;
+  font-size: 12px;
+  color: var(--text3);
+  pointer-events: auto;
+  z-index: 1;
+  text-decoration: none;
+}
+#div_carta_porte30 .form-control-feedback:hover { color: var(--teal); }
+
+/* ── botones ── */
+#div_carta_porte30 .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: 'DM Sans', sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.4;
+  transition: background .15s, border-color .15s;
+}
+#div_carta_porte30 .btn-primary {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+#div_carta_porte30 .btn-primary:hover { background: var(--navy-mid, #2a4fa0); }
+#div_carta_porte30 .btn-default,
+#div_carta_porte30 .btn-secondary {
+  background: transparent;
+  color: var(--text2);
+  border-color: var(--border);
+}
+#div_carta_porte30 .btn-default:hover,
+#div_carta_porte30 .btn-secondary:hover { background: var(--surface2); }
+#div_carta_porte30 .btn-info {
+  background: var(--teal);
+  color: #fff;
+  border-color: var(--teal);
+}
+#div_carta_porte30 .btn-info:hover { opacity: .9; }
+#div_carta_porte30 .btn-sm { padding: 5px 10px; font-size: 11.5px; }
+#div_carta_porte30 .btn-group { display: inline-flex; gap: 4px; }
+
+/* ── text-center → alinear a la izquierda ── */
+#div_carta_porte30 .text-center { text-align: left; }
+
+/* ── tablas ── */
+#div_carta_porte30 table { border-collapse: collapse; width: 100%; font-size: 12.5px; }
+#div_carta_porte30 table th {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+  text-align: left;
+}
+#div_carta_porte30 table td {
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  vertical-align: middle;
+  color: var(--text);
+}
+#div_carta_porte30 table tr:hover td { background: var(--surface2); }
+
+/* ── alertas ── */
+#div_carta_porte30 .alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  margin: 8px 12px 12px;
+  border: 1px solid transparent;
+}
+#div_carta_porte30 .alert-info {
+  background: var(--teal-light, #E4F8F7);
+  color: var(--teal-dark, #0e7a74);
+  border-color: rgba(43,191,179,.25);
+}
+#div_carta_porte30 .alert-warning {
+  background: var(--amber-bg, #FFF8E1);
+  color: var(--amber, #B45309);
+  border-color: rgba(245,158,11,.25);
+}
+
+/* ── responsive ── */
+@media (max-width: 900px) {
+  #div_carta_porte30 .col-md-3,
+  #div_carta_porte30 .col-md-4 { width: 50%; }
+  #div_carta_porte30 .col-md-5,
+  #div_carta_porte30 .col-md-7 { width: 50%; }
+}
+@media (max-width: 540px) {
+  #div_carta_porte30 [class*="col-md-"] { width: 100%; }
+  #div_carta_porte30 .row { padding: 10px 10px 0; }
+}

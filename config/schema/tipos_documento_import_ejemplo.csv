@@ -1,0 +1,12 @@
+codigo,nombre,ambito,categoria,orden
+licencia,Licencia Federal,operador,normativo,10
+apto_medico,Apto Médico,operador,normativo,20
+ine,INE / Identificación oficial,operador,normativo,30
+curso_capacitacion,Curso de capacitación,operador,normativo,40
+comprobante_domicilio,Comprobante de domicilio,operador,normativo,50
+poliza,Póliza de seguro,vehiculo,normativo,10
+tarjeta_circulacion,Tarjeta de Circulación,vehiculo,normativo,20
+seguro,Seguro vehicular,vehiculo,normativo,30
+verificacion_emisiones,Verificación de emisiones,vehiculo,normativo,40
+permiso_sict,Permiso SICT,empresa,normativo,10
+rfc_empresa,Constancia de situación fiscal,empresa,normativo,20

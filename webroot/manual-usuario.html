@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manual de usuario — SAF</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1B3A8C;
+      --teal: #2BBFB3;
+      --ink: #1a2332;
+      --muted: #5a6a7e;
+      --line: #e2e8f0;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --amber: #c87000;
+      --red: #c0392b;
+      --green: #1e8a5a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, rgba(43,191,179,.18), transparent 60%),
+        radial-gradient(900px 400px at 100% 0%, rgba(27,58,140,.12), transparent 55%),
+        var(--bg);
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+    header.hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #2549a8 55%, #1a7f7a 100%);
+      color: #fff;
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 18px 40px rgba(27,58,140,.25);
+    }
+    header.hero .brand {
+      font-family: Syne, sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      letter-spacing: -.02em;
+      margin: 0 0 6px;
+    }
+    header.hero .brand span {
+      display: block;
+      font-size: .95rem;
+      font-weight: 500;
+      opacity: .85;
+      margin-top: 4px;
+      font-family: "DM Sans", sans-serif;
+    }
+    header.hero p {
+      margin: 14px 0 0;
+      max-width: 54ch;
+      opacity: .92;
+    }
+    header.hero .meta {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: .82rem;
+    }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 28px;
+    }
+    nav.toc h2 {
+      font-family: Syne, sans-serif;
+      font-size: 1.05rem;
+      margin: 0 0 12px;
+      color: var(--navy);
+    }
+    nav.toc ol {
+      margin: 0;
+      padding-left: 1.2rem;
+      columns: 2;
+      gap: 28px;
+    }
+    nav.toc a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .92rem;
+    }
+    nav.toc a:hover { color: var(--navy); text-decoration: underline; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 24px 26px;
+      margin-bottom: 18px;
+    }
+    section h2 {
+      font-family: Syne, sans-serif;
+      font-size: 1.25rem;
+      margin: 0 0 12px;
+      color: var(--navy);
+      scroll-margin-top: 20px;
+    }
+    section h3 {
+      font-size: 1.02rem;
+      margin: 18px 0 8px;
+      color: #243b6b;
+    }
+    p { margin: 0 0 10px; }
+    ul, ol { margin: 0 0 12px; padding-left: 1.25rem; }
+    li { margin-bottom: 4px; }
+    .note, .tip, .warn {
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 14px 0;
+      font-size: .94rem;
+    }
+    .note { background: #eef4ff; border-left: 4px solid var(--navy); }
+    .tip { background: #e8faf7; border-left: 4px solid var(--teal); }
+    .warn { background: #fff6e8; border-left: 4px solid var(--amber); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .92rem;
+      margin: 10px 0 14px;
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f0f4fb; color: var(--navy); font-weight: 600; }
+    code, .path {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: .86em;
+      background: #f1f5f9;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+    .steps { counter-reset: step; list-style: none; padding-left: 0; }
+    .steps li {
+      counter-increment: step;
+      position: relative;
+      padding: 10px 12px 10px 48px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 8px;
+      background: #fafbfd;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 12px;
+      top: 10px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .85rem;
+      margin-top: 24px;
+    }
+    .print-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .btn {
+      appearance: none;
+      border: 0;
+      background: var(--navy);
+      color: #fff;
+      font: inherit;
+      font-weight: 600;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .btn.secondary { background: #fff; color: var(--navy); border: 1px solid var(--line); }
+    @media (max-width: 720px) {
+      nav.toc ol { columns: 1; }
+      header.hero { padding: 26px 20px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .print-bar { display: none; }
+      header.hero { box-shadow: none; break-inside: avoid; }
+      section { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="print-bar">
+      <button class="btn" type="button" onclick="window.print()">Imprimir / PDF</button>
+      <a class="btn secondary" href="./">Ir al sistema SAF</a>
+    </div>
+
+    <header class="hero">
+      <h1 class="brand">SAF<span>Sistema de cumplimiento normativo · Manual de usuario</span></h1>
+      <p>
+        Guía práctica para operar el sistema: empresas, vehículos, operadores,
+        documentos, alertas, porcentaje de cumplimiento y Carta Porte / CFDI.
+      </p>
+      <div class="meta">
+        <span class="pill">Versión 1.0 · 2026</span>
+        <span class="pill">Multi-empresa</span>
+        <span class="pill">Cumplimiento SICT / SAT</span>
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Índice">
+      <h2>Índice</h2>
+      <ol>
+        <li><a href="#intro">1. ¿Qué es SAF?</a></li>
+        <li><a href="#acceso">2. Acceso e inicio de sesión</a></li>
+        <li><a href="#roles">3. Roles y permisos</a></li>
+        <li><a href="#multiempresa">4. Varias empresas</a></li>
+        <li><a href="#panel">5. Panel de control</a></li>
+        <li><a href="#porcentaje">6. Porcentaje de cumplimiento</a></li>
+        <li><a href="#empresa">7. Documentación de la empresa</a></li>
+        <li><a href="#vehiculos">8. Vehículos</a></li>
+        <li><a href="#operadores">9. Operadores</a></li>
+        <li><a href="#cumplimiento">10. Cumplimiento y materiales peligrosos</a></li>
+        <li><a href="#alertas">11. Alertas y notificaciones</a></li>
+        <li><a href="#bajas">12. Bajas vehiculares</a></li>
+        <li><a href="#accesos">13. Accesos (usuarios)</a></li>
+        <li><a href="#facturacion">14. Carta Porte / CFDI</a></li>
+        <li><a href="#buscar">15. Búsqueda</a></li>
+        <li><a href="#flujo">16. Flujo recomendado</a></li>
+        <li><a href="#faq">17. Preguntas frecuentes</a></li>
+      </ol>
+    </nav>
+
+    <section id="intro">
+      <h2>1. ¿Qué es SAF?</h2>
+      <p>
+        SAF es el sistema para llevar el <strong>expediente documental</strong> de
+        autotransporte: empresa, flota y operadores. Controla vencimientos,
+        calcula el porcentaje de cumplimiento y, de forma opcional, permite
+        generar comprobantes con Carta Porte.
+      </p>
+      <p>Con SAF puedes:</p>
+      <ul>
+        <li>Administrar una o varias empresas desde la misma cuenta.</li>
+        <li>Asignar usuarios para que cada uno controle solo “sus” empresas.</li>
+        <li>Cargar documentos y ver qué falta, qué está por vencer o vencido.</li>
+        <li>Recibir alertas de vencimiento en la campanita y en el módulo Alertas.</li>
+        <li>Emitir CFDI / Carta Porte (módulo opcional).</li>
+      </ul>
+    </section>
+
+    <section id="acceso">
+      <h2>2. Acceso e inicio de sesión</h2>
+      <ol class="steps">
+        <li>Abre la URL del sistema (por ejemplo <span class="path">/saf/login</span>).</li>
+        <li>Ingresa tu <strong>correo</strong> y <strong>contraseña</strong>.</li>
+        <li>Al entrar verás el <strong>Panel de control</strong>.</li>
+      </ol>
+      <div class="warn">
+        Tras varios intentos fallidos, el acceso se bloquea temporalmente por seguridad.
+        Espera unos minutos e inténtalo de nuevo.
+      </div>
+      <p>Para salir: menú lateral → <strong>Salir</strong>.</p>
+    </section>
+
+    <section id="roles">
+      <h2>3. Roles y permisos</h2>
+      <table>
+        <thead>
+          <tr><th>Rol</th><th>Qué puede hacer</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Superadmin</strong></td>
+            <td>Ve todas las empresas activas. Puede crear cualquier usuario y asignar cualquier empresa.</td>
+          </tr>
+          <tr>
+            <td><strong>Administrador</strong></td>
+            <td>Administra las empresas que le asignaron. Puede crear usuarios y vincularlos a esas empresas.</td>
+          </tr>
+          <tr>
+            <td><strong>Usuario</strong></td>
+            <td>Opera solo las empresas asignadas (documentos, vehículos, operadores, cumplimiento).</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        El menú <strong>Accesos</strong> solo aparece para Superadmin y Administrador.
+      </div>
+    </section>
+
+    <section id="multiempresa">
+      <h2>4. Varias empresas</h2>
+      <p>
+        SAF es multi-empresa: una misma cuenta puede tener acceso a varias empresas
+        y cada una mantiene su propio expediente, flota, operadores y alertas.
+      </p>
+      <h3>Cambiar empresa activa</h3>
+      <ul>
+        <li>En el menú lateral, usa el selector <strong>Empresa activa</strong>.</li>
+        <li>En listados (vehículos, alertas, etc.) puedes filtrar por
+          <em>Todas las empresas</em> o una sola.</li>
+      </ul>
+      <h3>Agregar otra empresa</h3>
+      <ol class="steps">
+        <li>Ve a <strong>Documentación empresa</strong> o usa <strong>+ Nueva empresa</strong>.</li>
+        <li>Captura razón social, RFC, domicilio y permiso SICT.</li>
+        <li>Guarda. La empresa queda vinculada a tu cuenta.</li>
+        <li>Opcional: marca si <strong>transporta materiales peligrosos</strong>
+          (esto afecta el % de cumplimiento).</li>
+      </ol>
+    </section>
+
+    <section id="panel">
+      <h2>5. Panel de control</h2>
+      <p>Es la pantalla principal. Muestra un resumen de tus empresas:</p>
+      <ul>
+        <li>Porcentaje de cumplimiento.</li>
+        <li>Cantidad de vehículos y operadores.</li>
+        <li>Alertas activas / críticas.</li>
+        <li>Documentos vencidos o por vencer.</li>
+        <li>Indicadores de materiales peligrosos (si aplica).</li>
+      </ul>
+      <div class="tip">
+        Desde cada tarjeta de empresa puedes abrir su cumplimiento o documentación
+        para corregir faltantes.
+      </div>
+    </section>
+
+    <section id="porcentaje">
+      <h2>6. Porcentaje de cumplimiento</h2>
+      <p>
+        El porcentaje <strong>no</strong> se calcula solo con lo que ya cargaste.
+        Se mide contra los documentos <strong>requeridos</strong>:
+      </p>
+      <p style="font-size:1.05rem;font-weight:600;color:var(--navy)">
+        % = documentos OK ÷ documentos requeridos × 100
+      </p>
+      <p>Cuentan como OK: documentos <strong>vigentes</strong> o <strong>por vencer</strong>.
+        Los <strong>faltantes</strong> y <strong>vencidos</strong> bajan el porcentaje.</p>
+
+      <h3>Qué entra en el cálculo</h3>
+      <table>
+        <thead>
+          <tr><th>Ámbito</th><th>Requisitos típicos</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Empresa</td>
+            <td>Acta constitutiva, poder e ID del representante, CSF, opinión SAT,
+              domicilio fiscal, RNAF, permiso SICT, póliza RC federal, etc.</td>
+          </tr>
+          <tr>
+            <td>Cada vehículo activo</td>
+            <td>Tarjeta de circulación, póliza de seguro, inspección FM, inspección E.
+              Si es material peligroso: también docs MP de la unidad.</td>
+          </tr>
+          <tr>
+            <td>Cada operador activo</td>
+            <td>Licencia, INE, comprobante de domicilio, apto médico.
+              Si la empresa es MP: también curso de capacitación (y otros MP).</td>
+          </tr>
+          <tr>
+            <td>Empresa MP</td>
+            <td>Documentos adicionales SICT (reportes, manifiestos, bitácoras…)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        Si una empresa no tiene vehículos ni operadores, el % se basa solo en
+        documentos corporativos. Al dar de alta flota/personal, el denominador crece
+        y el % puede bajar hasta completar el expediente.
+      </div>
+    </section>
+
+    <section id="empresa">
+      <h2>7. Documentación de la empresa</h2>
+      <p>Menú: <strong>Documentación empresa</strong>.</p>
+      <h3>Datos generales</h3>
+      <ul>
+        <li>Nombre / razón social, RFC, teléfono, correo, estatus.</li>
+        <li>Domicilio fiscal (calle, colonia, C.P., municipio, estado).</li>
+        <li>Permiso SICT (número y fechas).</li>
+        <li>Datos CFDI (régimen, lugar de expedición, serie/folio) y certificados CSD.</li>
+        <li>Casilla de materiales peligrosos.</li>
+      </ul>
+      <h3>Expediente documental</h3>
+      <ol class="steps">
+        <li>Abre la empresa (Gestionar).</li>
+        <li>En <strong>Expediente documental</strong> agrega cada tipo de documento.</li>
+        <li>Sube el archivo y captura fecha de vencimiento cuando aplique.</li>
+        <li>El sistema marca el estatus: vigente / por vencer / vencido.</li>
+      </ol>
+      <div class="tip">
+        Prioriza permiso SICT, acta, CSF y opinión de cumplimiento: impactan fuerte
+        en el % de la empresa.
+      </div>
+    </section>
+
+    <section id="vehiculos">
+      <h2>8. Vehículos</h2>
+      <p>Menú: <strong>Vehículos</strong>.</p>
+      <h3>Alta de unidad</h3>
+      <ol class="steps">
+        <li>Clic en agregar / nuevo vehículo.</li>
+        <li>Elige la empresa, placas, marca, modelo, año, VIN, motor.</li>
+        <li>Selecciona <strong>tipo de carga</strong> (catálogo del sistema).</li>
+        <li>Si es carga general o especializada: captura modalidad y, si es
+          autotransporte federal, el tipo de servicio y ejes.</li>
+        <li>Guarda y entra a la ficha para cargar documentos.</li>
+      </ol>
+      <h3>Documentos del vehículo</h3>
+      <ul>
+        <li><strong>Normativos:</strong> tarjeta, seguro, inspección FM, inspección E.</li>
+        <li><strong>MP</strong> (si tipo de carga = material peligroso): póliza ambiental,
+          comprobante de pago, bitácora ocular, control de mantenimiento.</li>
+      </ul>
+      <div class="note">
+        Los badges en el menú indican cuántas unidades tienen documentos
+        vencidos o por vencer.
+      </div>
+    </section>
+
+    <section id="operadores">
+      <h2>9. Operadores</h2>
+      <p>Menú: <strong>Operadores</strong>.</p>
+      <ol class="steps">
+        <li>Registra nombre, apellidos, licencia, RFC/CURP y domicilio (datos Carta Porte).</li>
+        <li>Asigna la empresa correcta.</li>
+        <li>Carga documentos: licencia, INE, domicilio, apto médico, curso, etc.</li>
+        <li>Mantén el estatus en <strong>activo</strong> solo si opera; los inactivos
+          no pesan en el % de cumplimiento.</li>
+      </ol>
+    </section>
+
+    <section id="cumplimiento">
+      <h2>10. Cumplimiento y materiales peligrosos</h2>
+      <h3>Cumplimiento</h3>
+      <p>
+        Pantalla de avance por vehículo y operador: barras de porcentaje según
+        documentos obligatorios.
+      </p>
+      <h3>Materiales peligrosos</h3>
+      <p>
+        Checklist específico para unidades MP, operadores y documentos adicionales
+        de la empresa (reportes SICT, manifiestos, hojas de emergencia, etc.).
+      </p>
+      <p>Menú: <strong>Documentos adicionales</strong> para el expediente MP de empresa.</p>
+    </section>
+
+    <section id="alertas">
+      <h2>11. Alertas y notificaciones</h2>
+      <p>
+        Las alertas se generan por documentos <strong>vencidos</strong> o
+        <strong>por vencer</strong> (empresa, vehículo u operador).
+      </p>
+      <ul>
+        <li><strong>Campanita</strong> (barra superior): resumen rápido.</li>
+        <li><strong>Alertas</strong> (menú): listado completo filtrable por empresa.</li>
+        <li>Al iniciar sesión puede aparecer un modal con vencidos pendientes.</li>
+      </ul>
+      <div class="note">
+        Las alertas son <strong>por empresa</strong>. Los usuarios de la misma empresa
+        ven las mismas alertas. No se mezclan entre empresas distintas.
+      </div>
+      <p>Hoy las notificaciones son <em>dentro del sistema</em> (no se envían por correo automáticamente).</p>
+    </section>
+
+    <section id="bajas">
+      <h2>12. Bajas vehiculares</h2>
+      <p>Menú: <strong>Bajas vehiculares</strong>.</p>
+      <p>
+        Registra el trámite de baja de una unidad (siniestro, venta, reemplazo, etc.)
+        y avanza por pasos: inicio, devolución de placas, folio y cierre.
+      </p>
+      <p>Puedes adjuntar evidencias del trámite en el expediente de baja.</p>
+    </section>
+
+    <section id="accesos">
+      <h2>13. Accesos (usuarios)</h2>
+      <p>Solo administradores. Menú: <strong>Accesos</strong>.</p>
+      <ol class="steps">
+        <li>Crea un acceso con nombre, correo, rol y contraseña.</li>
+        <li>Marca las <strong>empresas a cargo</strong> (una o varias).</li>
+        <li>El usuario, al entrar, solo verá esas empresas y sus alertas/documentos.</li>
+        <li>Puedes editar después: cambiar empresas, rol o desactivar la cuenta.</li>
+      </ol>
+      <div class="tip">
+        Buena práctica: un usuario operativo por empresa o grupo de empresas,
+        y un administrador general para la cuenta.
+      </div>
+    </section>
+
+    <section id="facturacion">
+      <h2>14. Carta Porte / CFDI (opcional)</h2>
+      <p>Sección <strong>Extras</strong> del menú.</p>
+      <table>
+        <thead>
+          <tr><th>Módulo</th><th>Uso</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Generar Carta Porte</td><td>Armar y timbrar CFDI con complemento de transporte.</td></tr>
+          <tr><td>Comprobantes emitidos</td><td>Historial, XML/PDF, reimpresión.</td></tr>
+          <tr><td>Ubicaciones</td><td>Orígenes y destinos reutilizables.</td></tr>
+          <tr><td>Clientes</td><td>Receptores / destinatarios.</td></tr>
+          <tr><td>Productos y servicios</td><td>Conceptos del CFDI.</td></tr>
+          <tr><td>Catálogo de mercancías</td><td>Bienes transportados (Carta Porte).</td></tr>
+        </tbody>
+      </table>
+      <div class="warn">
+        Antes de timbrar: carga el CSD de la empresa (certificado y llave),
+        configura régimen, C.P. de expedición y folios disponibles.
+      </div>
+    </section>
+
+    <section id="buscar">
+      <h2>15. Búsqueda</h2>
+      <p>
+        En la barra superior escribe al menos 2 caracteres: busca empresas,
+        placas, serie, operadores, licencias y nombres de documentos.
+      </p>
+      <p>Los resultados respetan el alcance de tus empresas.</p>
+    </section>
+
+    <section id="flujo">
+      <h2>16. Flujo recomendado (puesta en marcha)</h2>
+      <ol class="steps">
+        <li>Inicia sesión como administrador.</li>
+        <li>Registra la empresa y su permiso SICT.</li>
+        <li>Carga documentos corporativos obligatorios.</li>
+        <li>Alta de vehículos y sus 4 documentos normativos.</li>
+        <li>Alta de operadores y sus documentos.</li>
+        <li>Si aplica MP: marca la casilla en empresa, tipifica unidades y completa docs MP.</li>
+        <li>Revisa el % en el Panel y el módulo Cumplimiento.</li>
+        <li>Crea usuarios en Accesos y asígnales la(s) empresa(s).</li>
+        <li>(Opcional) Configura CFDI y genera Carta Porte.</li>
+      </ol>
+    </section>
+
+    <section id="faq">
+      <h2>17. Preguntas frecuentes</h2>
+      <h3>¿Por qué bajó mi porcentaje al agregar un vehículo?</h3>
+      <p>
+        Porque el sistema ahora exige también los documentos de esa unidad.
+        Sube tarjeta, seguro e inspecciones para recuperar el %.
+      </p>
+      <h3>¿Puedo ver empresas de otro usuario?</h3>
+      <p>No. Solo ves las empresas vinculadas a tu cuenta (o todas si eres Superadmin).</p>
+      <h3>¿Las alertas son por usuario?</h3>
+      <p>No: son por empresa. Todos los usuarios de esa empresa las comparten.</p>
+      <h3>¿Qué estatus de documento son “buenos”?</h3>
+      <p><strong>Vigente</strong> y <strong>por vencer</strong>. Vencido y faltante restan.</p>
+      <h3>No aparece el menú Accesos</h3>
+      <p>Tu rol no es administrador. Pide a un admin que te eleve el rol o gestione usuarios.</p>
+      <h3>Error al generar Carta Porte</h3>
+      <p>
+        Verifica CSD, régimen fiscal, C.P., folios, cliente, ubicaciones,
+        mercancía, vehículo y operador completos.
+      </p>
+    </section>
+
+    <footer>
+      SAF — Sistema de cumplimiento normativo · Manual de usuario v1.0 · 2026<br>
+      Archivo: <span class="path">/saf/manual-usuario.html</span>
+    </footer>
+  </div>
+</body>
+</html>
