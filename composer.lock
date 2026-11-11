@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "25d563fefb8899d587ad186dbadc9023",
+    "content-hash": "1548949163c3194064d7770e8b0fd95a",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -630,26 +630,26 @@
         },
         {
             "name": "endroid/qr-code",
-            "version": "6.0.0",
+            "version": "6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/endroid/qr-code.git",
-                "reference": "61cc3ef6863936b58e0cbe63a44da79efe3c84cd"
+                "reference": "b2be4d6111c3da2ca37aa8583f7b3f5ce1f0b7c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/endroid/qr-code/zipball/61cc3ef6863936b58e0cbe63a44da79efe3c84cd",
-                "reference": "61cc3ef6863936b58e0cbe63a44da79efe3c84cd",
+                "url": "https://api.github.com/repos/endroid/qr-code/zipball/b2be4d6111c3da2ca37aa8583f7b3f5ce1f0b7c0",
+                "reference": "b2be4d6111c3da2ca37aa8583f7b3f5ce1f0b7c0",
                 "shasum": ""
             },
             "require": {
                 "bacon/bacon-qr-code": "^3.0",
-                "php": "^8.2"
+                "php": "^8.5"
             },
             "require-dev": {
                 "endroid/quality": "dev-main",
                 "ext-gd": "*",
-                "khanamiryan/qrcode-detector-decoder": "^2.0.2",
+                "khanamiryan/qrcode-detector-decoder": "^2.0.3",
                 "setasign/fpdf": "^1.8.2"
             },
             "suggest": {
@@ -690,7 +690,7 @@
             ],
             "support": {
                 "issues": "https://github.com/endroid/qr-code/issues",
-                "source": "https://github.com/endroid/qr-code/tree/6.0.0"
+                "source": "https://github.com/endroid/qr-code/tree/6.2.0"
             },
             "funding": [
                 {
@@ -698,7 +698,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-10-21T20:26:43+00:00"
+            "time": "2026-11-03T10:30:23+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",
@@ -6734,5 +6734,5 @@
         "php": ">=8.2"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
